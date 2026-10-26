@@ -20,7 +20,8 @@ It affects all Opus audio connections in Discord tabs while loaded.
 To remove it, disable/delete **Discord Stereo Receiver Test** in Brave's extensions
 page, then reload Discord. Existing calls need recreation to reset negotiation.
 
-Discord's desktop clients preserved stereo without this helper in the live
-2026-10-26 call; this helper addresses browser receivers, which downmixed to
-mono in local tests. It does not change the receive preferences of other
-participants.
+Both receiver paths were live-verified on 2026-10-26: desktop Discord kept
+stereo without this helper (its stereo negotiation alone is enough for it),
+and browser Discord produced correct left/right separation with this helper,
+after the receiver downmix seen in local tests. It does not change the receive
+preferences of other participants.

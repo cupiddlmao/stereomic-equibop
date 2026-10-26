@@ -1,17 +1,17 @@
 # StereoMic for Equibop
 
-Experimental Equicord userplugin for **Equibop on Linux**, including CachyOS.
+Equicord userplugin for **Equibop on Linux**, including CachyOS.
 It requests two-channel microphone capture, requests Opus stereo in local and
 remote audio SDP, and lets you choose a requested bitrate (128 kbps by default).
 It can request capture without echo cancellation, noise suppression, and automatic
 gain control. It does not patch or replace `discord_voice.node`.
 
-A live two-account Discord call on 2026-10-26 confirmed that listeners on the
-official desktop Discord client receive separate left and right channels.
-Capture settings and SDP alone still do not prove stereo everywhere: browser
-Discord needed the included receiver helper in local tests, and Discord's
-audio graph, input hardware, or PipeWire routing may still downmix or limit
-bitrate. A mono microphone cannot supply distinct left and right channels. All WebRTC Opus audio sessions in Equibop, including screen-share
+A live two-account Discord call on 2026-10-26 confirmed separate left and
+right channels for listeners on both receiver paths tested: official desktop
+Discord (from the sender's stereo negotiation alone) and browser Discord
+(using the included receiver helper to avoid the receiver-side downmix).
+Discord may still encode below the requested bitrate, and hardware or
+PipeWire routing changes can still send one channel. A mono microphone cannot supply distinct left and right channels. All WebRTC Opus audio sessions in Equibop, including screen-share
 audio, are affected while the plugin is enabled; video SDP is left alone.
 
 ## Install
@@ -39,6 +39,22 @@ and rejoin voice. Repeat the build and restart after changing plugin files.
 Do not use the official Discord client's injection command (`pnpm inject`) for
 Equibop. This plugin intentionally declines to start outside Equibop.
 
+## Point an installed Equibop at the build (script)
+
+Instead of changing the Equicord location by hand, close Equibop and run from
+this repository:
+
+```bash
+python3 configure_installation.py
+```
+
+It refuses to run unless the build is complete and contains StereoMic, records
+the build location in `~/.config/equibop/state.json`, enables StereoMic in
+Equibop's settings with the default bitrate, and first backs both files up to
+`installation-backups/<timestamp>/` in this repository. To undo, close Equibop
+and copy `state.json` (and, if you want the plugin unchecked, the settings
+file) from a backup back over the files in `~/.config/equibop/`.
+
 ## Verify stereo
 
 **If the listener is browser Discord, install the included
@@ -47,8 +63,8 @@ tab, and rejoin voice first.** In a local Chromium WebRTC test, sender-only ster
 negotiation still produced mono playback on an unmodified receiver. Requesting
 stereo on the receiver too preserved left/right separation. That test does not
 by itself establish what Discord forwards to other clients. In the live call,
-desktop Discord listeners heard stereo from the sender alone; the helper is for
-browser receivers, which are the ones that downmixed locally.
+desktop Discord listeners heard stereo from the sender alone, and the browser
+listener using this helper also heard correct left/right separation.
 
 1. Select a genuine stereo input or a stereo virtual source in Discord. On CachyOS,
    use your PipeWire routing tool (such as an already-installed qpwgraph or Helvum)

@@ -19,9 +19,9 @@ server, and muted playback. Both peers connected and received packets:
 | Both endpoints configured for stereo | 0.706 | 0 |
 
 This reproduces a browser receiver downmix independently of Discord or the mixer.
-The helper extension requests `stereo=1` in the receiver's local Opus SDP. Desktop
-Discord clients preserved stereo from the sender alone in the live call below;
-the live browser Discord test with that helper is still needed for that path.
+The helper extension requests `stereo=1` in the receiver's local Opus SDP.
+Desktop Discord clients preserved stereo from the sender alone, and the live
+browser Discord test with that helper also passed on 2026-10-26 (below).
 
 The helper uses a document-start MAIN-world content script as documented in
 [Chrome's manifest reference](https://developer.chrome.com/docs/extensions/reference/manifest/content-scripts).
@@ -32,5 +32,6 @@ A real two-account voice call was tested with left-only and right-only input.
 Listeners using the official desktop Discord client reported hearing the
 signal on the correct side. Discord's forwarding path therefore preserved
 stereo for those clients without any receiver-side modification. The browser
-receiver path with this repository's helper has not been verified through a
-live Discord call yet (the local P2P test above still supports it).
+listener with this repository's helper extension also reported correct left
+and right separation in live browser Discord calls the same day, closing the
+receiver downmix reproduced above.
