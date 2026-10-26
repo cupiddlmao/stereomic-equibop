@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "Discord Stereo Receiver Test",
+    "version": "0.1.0",
+    "description": "Request stereo Opus playback in browser Discord for testing a stereo sender.",
+    "content_scripts": [
+        {
+            "matches": ["https://discord.com/*", "https://canary.discord.com/*", "https://ptb.discord.com/*"],
+            "js": ["receiver.js"],
+            "run_at": "document_start",
+            "world": "MAIN"
+        }
+    ]
+}
