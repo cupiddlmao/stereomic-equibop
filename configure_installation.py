@@ -45,5 +45,5 @@ for path, data in ((state_path, state), (settings_path, settings)):
 assert json.loads(state_path.read_text())["equicordDir"] == str(build)
 assert json.loads(settings_path.read_text())["plugins"]["StereoMic"]["enabled"]
 print("Configured build:", build)
-print("StereoMic enabled; requested bitrate: 128 kbps")
+print("StereoMic enabled; requested bitrate:", plugin.get("bitrate", 128000) // 1000, "kbps")
 print("Backups:", backup)

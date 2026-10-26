@@ -27,7 +27,7 @@ git clone https://github.com/Equicord/Equicord.git
 cd Equicord
 pnpm install --frozen-lockfile
 mkdir -p src/userplugins
-cp -r '/home/noah/Documents/ChatGPT/discord stereo plugin/stereoMic' src/userplugins/
+cp -r /path/to/stereomic-equibop/stereoMic src/userplugins/
 pnpm build --dev
 ```
 

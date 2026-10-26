@@ -51,7 +51,7 @@ function description(value: RTCSessionDescriptionInit): RTCSessionDescriptionIni
 export default definePlugin({
     name: "StereoMic",
     description: "Experimental stereo microphone capture and Opus negotiation for Equibop/WebRTC. Requires a stereo input.",
-    authors: [{ name: "Noah", id: 0n }],
+    authors: [{ name: "Noah", id: 1343676611182071899n }],
     tags: ["Voice"],
     settings,
 

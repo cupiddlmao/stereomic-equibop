@@ -9,8 +9,8 @@ It affects all Opus audio connections in Discord tabs while loaded.
 ## Use with Brave
 
 1. Open `brave://extensions` and turn on **Developer mode**.
-2. Click **Load unpacked** and select this folder:
-   `/home/noah/Documents/ChatGPT/discord stereo plugin/browserStereoReceiver`
+2. Click **Load unpacked** and select this repository's `browserStereoReceiver`
+   folder.
 3. Reload the browser Discord tab, then join the test call with your second account.
 4. Keep the browser microphone muted and playback directed to your headphones.
    Keep browser playback out of your mixer's Discord input to avoid feedback.
